@@ -24,18 +24,23 @@ public class MoodAnalyzer {
 	 * @return Happy or sad
 	 * @throws Exception
 	 */
-	public Mood analyseMood() throws Exception {
+	public Mood analyseMood() throws MoodAnalysisException {
 		try {
 			if (message.toLowerCase().indexOf(Mood.HAPPY.name().toLowerCase()) != -1) {
 				return Mood.HAPPY;
 			} else if (message.toLowerCase().indexOf(Mood.SAD.name().toLowerCase()) != -1) {
 				return Mood.SAD;
+			} else if (message == "") {
+				throw new MoodAnalysisException(Mood.EMPTY.name());
 			}
 			return Mood.HAPPY;
 		} catch (NullPointerException e) {
-			return Mood.HAPPY;
+			if (message == null) {
+				throw new MoodAnalysisException(Mood.NULL.name());
+			}
+			throw new MoodAnalysisException(e.getMessage());
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new MoodAnalysisException(e.getMessage());
 		}
 	}
 }

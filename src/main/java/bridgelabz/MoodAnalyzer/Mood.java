@@ -1,5 +1,5 @@
 package bridgelabz.MoodAnalyzer;
 
 public enum Mood {
-	HAPPY, SAD
+	HAPPY, SAD, NULL, EMPTY
 }
